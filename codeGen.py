@@ -8,14 +8,21 @@ from random import randrange, choice
 from cryptography.fernet import Fernet
 
 # let the user key in the web page for the password
-websiteLink = input("Website URL:")
+while True:
+    websiteLink = input("Website URL(This will be the file name of your saved credentials.):")
+    website = 'Password for ' + websiteLink
+    if websiteLink.isspace() is True or websiteLink == "":
+            print("Please enter a valid URL for identification.")
+    else:
+        fileName = open(website, "w+")
+        break
 
 # insert the desired length of password
 while True:
     try:
-        passwordLength = int(input("Length of password (Longer password is more secured):"))
+        passwordLength = int(input("Length of password (Longer password is more secured.):"))
         if passwordLength < 6:
-            print("Please enter a value above 5")
+            print("Please enter a value above 5.")
             continue
     except ValueError:
         print("Please enter an appropriate password length.")
@@ -44,6 +51,8 @@ if specialSymbol_req == "Y":
             ciphered_text = cipher_suite.encrypt(b'password')
             break
 
+# ##decrease the input length of pw by one then adding a specific symbol at a random position ## #
+
 elif specialSymbol_req == "N":
     alphabet = string.ascii_letters + string.digits
     while True:
@@ -64,3 +73,4 @@ elif specialSymbol_req != "Y" or "N":
     print("Please enter Y or N only.")
 
 # write the generated key to a txt file
+# unfinished
