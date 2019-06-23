@@ -44,8 +44,6 @@ if specialSymbol_req == "Y":
             ciphered_text = cipher_suite.encrypt(b'password')
             break
 
-# ##decrease the input length of pw by one then adding a specific symbol at a random position ## #
-
 elif specialSymbol_req == "N":
     alphabet = string.ascii_letters + string.digits
     while True:
