@@ -9,9 +9,9 @@ from cryptography.fernet import Fernet
 
 # let the user key in the web page for the password
 while True:
-    websiteLink = input("Website URL(This will be the file name of your saved credentials.):")
-    website = 'Password for ' + websiteLink
-    if websiteLink.isspace() is True or websiteLink == "":
+    websiteIdentification = input("Website identification(This will be the file name of your saved credentials.):")
+    website = 'Password for ' + websiteIdentification
+    if websiteIdentification.isspace() is True or websiteIdentification == "":
             print("Please enter a valid URL for identification.")
     else:
         fileName = open(website, "w+")
