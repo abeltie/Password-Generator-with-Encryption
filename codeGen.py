@@ -9,12 +9,12 @@ from cryptography.fernet import Fernet
 
 # let the user key in the web page for the password
 while True:
-    websiteIdentification = input("Website identification(This will be the file name of your saved credentials.):")
+    websiteIdentification = input("Website Identification(This will remind you of the website where you've saved your "
+                                  "password):")
     website = 'Password for ' + websiteIdentification
     if websiteIdentification.isspace() is True or websiteIdentification == "":
-            print("Please enter a valid URL for identification.")
+        print("Please enter a valid URL for identification.")
     else:
-        fileName = open(website, "w+")
         break
 
 # insert the desired length of password
@@ -37,12 +37,12 @@ if specialSymbol_req == "Y":
     specialSymbol = input("Which symbol do you intend to include?")
     alphabet = string.ascii_letters + string.digits
     while True:
-        password = ''.join(choice(alphabet) for i in range(1, passwordLength+1))
+        password = ''.join(choice(alphabet) for i in range(1, passwordLength + 1))
         if (any(c.islower() for c in password)
                 and any(c.isupper() for c in password)
                 and sum(c.isdigit() for c in password) >= 3):
             index = randrange(1, passwordLength)
-            password = password[:index] + specialSymbol + password[index+1:]
+            password = password[:index] + specialSymbol + password[index + 1:]
             # print the password
             print(password)
             # write credentials to txt files
@@ -56,7 +56,7 @@ if specialSymbol_req == "Y":
 elif specialSymbol_req == "N":
     alphabet = string.ascii_letters + string.digits
     while True:
-        password = ''.join(choice(alphabet) for i in range(1, passwordLength+1))
+        password = ''.join(choice(alphabet) for i in range(1, passwordLength + 1))
         if (any(c.islower() for c in password)
                 and any(c.isupper() for c in password)
                 and sum(c.isdigit() for c in password) >= 3):
@@ -72,5 +72,6 @@ elif specialSymbol_req == "N":
 elif specialSymbol_req != "Y" or "N":
     print("Please enter Y or N only.")
 
-# write the generated key to a txt file
-# unfinished
+file_name = "Password Directory.txt"
+f = open(file_name, "w+")  # open file in write mode
+f.write(websiteIdentification + "   " + password + "\n")
