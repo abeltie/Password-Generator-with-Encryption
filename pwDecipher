@@ -1,0 +1,31 @@
+from cryptography.fernet import Fernet
+import re
+
+websiteIdentification = input("Website credentials that you have used to save your password information (You can "
+								"lookup for it in the text file where you have saved it and paste it here): ")
+
+# Please enter the file location
+file_passwordKey = open("/Password Key.txt")
+global passwordKey
+for line in file_passwordKey:
+	if websiteIdentification in line:
+		passwordKey = re.findall(r"b'(.+?)'", line)
+		break
+	else:
+		print('Website cannot be identified.')
+		break
+
+# Please enter the file location
+file_cipheredText = open("/Ciphered Text.txt")
+global cipheredText
+for line in file_cipheredText:
+	if websiteIdentification in line:
+		cipheredText = re.findall(r"b'(.+?)'", line)
+		break
+	else:
+		print('Website cannot be identified.')
+		break
+
+f = Fernet(str.encode(''.join(passwordKey)))
+password = f.decrypt(str.encode(''.join(cipheredText)))
+print("Password: " + password.decode('utf-8'))
